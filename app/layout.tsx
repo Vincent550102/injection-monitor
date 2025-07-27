@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://inj.pornhub.mov/icon.png",
-        width: 512,
-        height: 512,
+        width: 1200,
+        height: 630,
         alt: "Injection Monitor icon",
         type: "image/x-icon",
       },
