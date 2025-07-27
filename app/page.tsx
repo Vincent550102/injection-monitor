@@ -178,7 +178,17 @@ export default function Home() {
 
   return (
     <main className="min-h-screen p-8 flex flex-col gap-8 bg-gray-100 dark:bg-neutral-900">
-      <h1 className="text-2xl font-bold text-center">Injection Monitor</h1>
+      <div className="flex items-center justify-center gap-3">
+        <h1 className="text-2xl font-bold">Injection Monitor</h1>
+        <a
+          href="https://github.com/Vincent550102/injection-monitor/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 underline text-sm hover:text-blue-800"
+        >
+          open&nbsp;source
+        </a>
+      </div>
       <div className="flex flex-col md:flex-row gap-6">
         <div className="flex flex-col flex-1 gap-2">
           <label className="font-medium">Command</label>
