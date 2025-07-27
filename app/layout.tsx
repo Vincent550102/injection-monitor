@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: "https://inj.pornhub.mov/icon.png",
+        url: "https://vincent550102.github.io/injection-monitor/icon.png",
         width: 1200,
         height: 630,
         alt: "Injection Monitor icon",
