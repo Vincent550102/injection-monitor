@@ -15,6 +15,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Injection Monitor",
   description: "Real-time command injection monitor with syntax highlighting and balance analysis.",
+  openGraph: {
+    images: [
+      {
+        url: "/favicon.ico",
+        width: 64,
+        height: 64,
+        alt: "Injection Monitor icon",
+        type: "image/x-icon",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
