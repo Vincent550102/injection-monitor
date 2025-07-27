@@ -177,8 +177,11 @@ export default function Home() {
   const detectedLang = highlightRes.lang;
 
   return (
-    <main className="min-h-screen p-8 flex flex-col gap-8 bg-gray-100 dark:bg-neutral-900">
-      <h1 className="text-2xl font-bold text-center">Injection Monitor</h1>
+    <main className="min-h-screen p-8 flex flex-col gap-8 bg-gray-100 dark:bg-neutral-900 mx-auto max-w-4xl">
+      <h1 className="text-3xl font-bold text-center">Injection Monitor</h1>
+      <p className="text-center text-sm text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Real-time command injection monitor with syntax highlighting and balance analysis.
+      </p>
       <div className="flex flex-col md:flex-row gap-6">
         <div className="flex flex-col flex-1 gap-2">
           <label className="font-medium">Command</label>
