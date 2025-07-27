@@ -1,5 +1,8 @@
 # Injection Monitor
 
+<img width="1024" height="1024" alt="image" src="https://github.com/user-attachments/assets/1919f02f-3689-417d-a98c-0a70e4d53445" />
+
+
 A web tool that checks whether a command combined with injection payloads is properly balanced in real-time.
 
 ## Features
