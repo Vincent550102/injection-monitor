@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: "/favicon.ico",
-        width: 64,
-        height: 64,
+        url: "/icon.png",
+        width: 512,
+        height: 512,
         alt: "Injection Monitor icon",
         type: "image/x-icon",
       },
