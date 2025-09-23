@@ -5,11 +5,18 @@
 
 A web tool that checks whether a command combined with injection payloads is properly balanced in real-time.
 
+## Screenshot
+
+<img width="1760" height="1524" alt="image" src="https://github.com/user-attachments/assets/218f5fe4-e6bd-4efe-8518-f565065de117" />
+
+
+
 ## Features
 
 1. **Real-time analysis** – Detect unclosed brackets, quotes, and block comments while you type.
 2. **Multi-language syntax highlighting** – Powered by `highlight.js` with automatic language detection or manual selection.
 3. **Comment awareness** – Understands `//`, `--`, and `/* … */` comments to avoid false positives.
+
 
 ## Quick Start
 
