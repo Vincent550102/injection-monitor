@@ -1,6 +1,6 @@
 "use client";
 import "highlight.js/styles/github-dark.css";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
 import typescript from "highlight.js/lib/languages/typescript";
@@ -129,6 +129,7 @@ export default function Home() {
     const [command, setCommand] = useState("");
     const [injections, setInjections] = useState<string[]>([""]);
     const [language, setLanguage] = useState("auto");
+    const [copied, setCopied] = useState(false);
 
     const updateInjection = (index: number, value: string) => {
         setInjections((prev) => {
@@ -170,6 +171,13 @@ export default function Home() {
 
     // Click to copy {{INJECT}} placeholder
 
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const url = new URL(window.location.href);
+        const c = url.searchParams.get("c");
+        if (c) setCommand(c);
+    }, []);
+
     const analysis = useMemo(() => analyzeClosure(combined), [combined]);
 
     const highlightRes = useMemo(() => {
@@ -193,6 +201,53 @@ export default function Home() {
     const highlighted = highlightRes.html;
     const detectedLang = highlightRes.lang;
 
+    const shareCurrentCommand = async () => {
+        try {
+            const url = new URL(window.location.href);
+            if (command) {
+                url.searchParams.set("c", command);
+            } else {
+                url.searchParams.delete("c");
+            }
+            const shareUrl = url.toString();
+
+            const nav: any = navigator as any;
+            if (nav.share) {
+                try {
+                    await nav.share({
+                        title: "Injection Monitor",
+                        text: "Shared command",
+                        url: shareUrl,
+                    });
+                    return;
+                } catch {
+                    // Fallback to copy
+                }
+            }
+
+            try {
+                await navigator.clipboard.writeText(shareUrl);
+            } catch {
+                const textarea = document.createElement("textarea");
+                textarea.value = shareUrl;
+                textarea.style.position = "fixed";
+                textarea.style.opacity = "0";
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try {
+                    document.execCommand("copy");
+                } finally {
+                    document.body.removeChild(textarea);
+                }
+            }
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1500);
+        } catch {
+            // no-op
+        }
+    };
+
     return (
         <main className="min-h-screen p-8 flex flex-col gap-8 bg-gray-100 dark:bg-neutral-900 mx-auto max-w-4xl">
             <h1 className="text-3xl font-bold text-center">
@@ -204,7 +259,24 @@ export default function Home() {
             </p>
             <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex flex-col flex-1 gap-2">
-                    <label className="font-medium">Command</label>
+                    <div className="flex items-center justify-between">
+                        <label className="font-medium">Command</label>
+                        <div className="flex items-center gap-2">
+                            {copied && (
+                                <span className="text-xs text-green-600" aria-live="polite">
+                                    Link copied
+                                </span>
+                            )}
+                            <button
+                                type="button"
+                                className="text-sm bg-gray-200 dark:bg-neutral-700 px-2 py-1 rounded hover:bg-gray-300 dark:hover:bg-neutral-600 transition-colors"
+                                onClick={shareCurrentCommand}
+                                aria-label="Share Command"
+                            >
+                                Share
+                            </button>
+                        </div>
+                    </div>
                     <textarea
                         className="p-2 rounded border resize-y min-h-[120px] dark:bg-neutral-800 dark:text-white"
                         value={command}
