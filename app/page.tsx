@@ -211,8 +211,10 @@ export default function Home() {
             }
             const shareUrl = url.toString();
 
-            const nav: any = navigator as any;
-            if (nav.share) {
+            const nav = navigator as Navigator & {
+                share?: (data: { title?: string; text?: string; url?: string }) => Promise<void>;
+            };
+            if (typeof nav.share === "function") {
                 try {
                     await nav.share({
                         title: "Injection Monitor",
